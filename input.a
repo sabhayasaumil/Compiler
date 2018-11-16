@@ -1,0 +1,109 @@
+!register
+; from R4D compiler written by Sabhaya Saumil
+; x = +3 + -2 + 1;
+          ldc       2
+          st        x
+; y = x;
+          st        y
+; z = x*(2 + y) + (((4099)));
+          add       @2
+          mult      x
+          add       @4099
+          st        z
+; println(z + x + -2);
+          add       x
+          add       @_2
+          dout
+          ldc       '\n'
+          aout
+; println(4107);
+          ld        @4107
+          dout
+          ldc       '\n'
+          aout
+; println((z - (x - 50)   // comment in middle of statement
+          ld        x
+          sub       @50
+; 		) / 2 - x);
+          st        @t0
+          ld        z
+          sub       @t0
+          div       @2
+          sub       x
+          dout
+          ldc       '\n'
+          aout
+; println(2075);
+          ldc       2075
+          dout
+          ldc       '\n'
+          aout
+; 	;                       // null statement 
+;     {{;                     // compound statement
+;        {
+; x = 10;  
+          ldc       10
+          st        x
+;        ;
+; y = 20;
+          ldc       20
+          st        y
+;     }};}
+;     {}
+; print(x);
+          ld        x
+          dout
+; println(x);
+          dout
+          ldc       '\n'
+          aout
+; println(1010);
+          ldc       1010
+          dout
+          ldc       '\n'
+          aout
+; println(y);
+          ld        y
+          dout
+          ldc       '\n'
+          aout
+; println(20);
+          ldc       20
+          dout
+          ldc       '\n'
+          aout
+; x = 1 + (2 + (3+ 4));
+          ldc       10
+          st        x
+; println(x);
+          dout
+          ldc       '\n'
+          aout
+; println(10);
+          ldc       10
+          dout
+          ldc       '\n'
+          aout
+; x = 1 + 2 + 3 + 4 + 5;
+          ldc       15
+          st        x
+; println(x);
+          dout
+          ldc       '\n'
+          aout
+; println(15);
+          ldc       15
+          dout
+          ldc       '\n'
+          aout
+
+                      halt
+x:        dw        0
+@2:       dw        2
+@_2:      dw        -2
+y:        dw        0
+z:        dw        0
+@t0:      dw        0
+@4099:    dw        4099
+@4107:    dw        4107
+@50:      dw        50
